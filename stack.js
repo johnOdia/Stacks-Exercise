@@ -7,6 +7,7 @@ function Stack() {
 function Node(value) {
     this.value = value
     this.next = null
+    this.prev = null;
 }
 
 Stack.prototype.push = function (val) {
@@ -17,7 +18,8 @@ Stack.prototype.push = function (val) {
         this.last = node
     }
     else {
-        this.last.next = node
+        this.first.next = node
+        this.first.next.prev = this.first
         this.first = node
     }
     this.size++    
@@ -33,4 +35,11 @@ Stack.prototype.pop = function () {
 
 Stack.prototype.peek = function () {
     return this.first.value
+}
+
+Stack.prototype.print = function () {
+    while(this.last){
+        console.log(this.last.value);
+        this.last = this.last.next 
+    }  
 }
